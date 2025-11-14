@@ -12,3 +12,8 @@ https://www.figma.com/design/sJtDO8WNiDcehboerUdlRq/FSW-Donald%E2%80%99s?node-id
 ```
 https://alunos.fullstackclub.com.br/area/produto/item/5084026
 ```
+
+##### Melhores momentos
+* 12min start projeto 
+* 50min finaliza prisma
+* 50min inicia app nexts
