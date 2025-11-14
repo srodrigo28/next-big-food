@@ -1,5 +1,6 @@
 #### Instalando
 
+##### Prisma
 * primeira dependência prisma
 ```
 npm i prisma@6.2.1
@@ -37,7 +38,7 @@ rodrigoexer8@gmail.com
 DATABASE_URL="postgresql://neondb_owner:npg_ptavjZC37YTq@ep-crimson-morning-acrp7yug-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
-#### instalando ts node
+#### instalando ts-node
 ```
 npm i -D ts-node@.9.2
 ```
@@ -66,4 +67,24 @@ npx prisma generate
 ** se quiser sincronizar sem recriar migrações:
 ```
 npx prisma db push
+```
+
+#### ShadCN
+```
+npx shadcn@2.3.0 init
+```
+
+* button
+```
+npx shadcn@2.3.0 add button
+```
+
+* label, input
+```
+npx shadcn@2.3.0 add label input
+```
+
+* modal, card
+```
+npx shadcn@2.3.0 add badge card select sheet
 ```
