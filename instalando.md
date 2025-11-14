@@ -26,6 +26,9 @@ npx prisma format
 npx prisma migrate dev --name first-migrate
 ```
 
+* generate
+npx prisma generate
+
 * neon db
 ```
 rodrigoexer8@gmail.com

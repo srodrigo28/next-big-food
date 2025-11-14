@@ -1,0 +1,176 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/**
+ * @model Restaurant
+ * Representa um restaurante no sistema.
+ * Cada restaurante tem um ID único (UUID), nome único, slug para URLs amigáveis,
+ * descrição, e URLs para imagem de perfil e capa.
+ * Relações:
+ * - 1:N com MenuCategory (um restaurante tem várias categorias de menu)
+ * - 1:N com Product (um restaurante tem vários produtos)
+ * - 1:N com Order (um restaurante recebe vários pedidos)
+ * Campos de auditoria:
+ * - createdAt: data de criação automática
+ * - updatedAt: atualizado automaticamente a cada modificação
+ */
+model Restaurant {
+  id             String @id @default(uuid()) // Chave primária: UUID gerado automaticamente
+  name           String @unique // Nome único do restaurante (ex: "Pizzaria Bella")
+  slug           String // URL amigável (ex: "pizzaria-bella") - não precisa ser único globalmente
+  description    String // Descrição do restaurante
+  avatarImageUrl String // URL da foto de perfil
+  coverImageUrl  String // URL da imagem de capa
+
+  // Relações 1:N
+  menuCategories MenuCategory[] // Categorias de menu deste restaurante
+  products       Product[] // Produtos oferecidos
+  orders         Order[] // Pedidos realizados neste restaurante
+
+  createdAt DateTime @default(now()) // Data/hora de criação
+  updatedAt DateTime @updatedAt // Data/hora da última atualização
+}
+
+/**
+ * @model MenuCategory
+ * Representa uma categoria no cardápio do restaurante (ex: "Pizzas", "Bebidas").
+ * Relações:
+ * - N:1 com Restaurant (uma categoria pertence a um restaurante)
+ * - 1:N com Product (uma categoria tem vários produtos)
+ * A exclusão em cascata (onDelete: Cascade) garante que:
+ * - Se o restaurante for deletado, todas as suas categorias também serão.
+ */
+model MenuCategory {
+  id           String     @id @default(uuid()) // Chave primária: UUID
+  name         String // Nome da categoria (ex: "Pizzas Doces")
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String // Chave estrangeira para Restaurant.id
+
+  products Product[] // Produtos nesta categoria
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/**
+ * @model Product
+ * Representa um item do cardápio (ex: "Pizza Margherita").
+ * Relações:
+ * - N:1 com Restaurant (um produto pertence a um restaurante)
+ * - N:1 com MenuCategory (um produto está em uma categoria)
+ * - 1:N com OrderProduct (um produto pode estar em vários itens de pedido)
+ * Campos importantes:
+ * - ingredients: array de strings (ex: ["massa", "molho", "muçarela"])
+ * - price: valor em reais (Float) - use com cuidado em produção (melhor Decimal)
+ * onDelete: Cascade em ambas as relações → produto é removido se restaurante ou categoria forem excluídos
+ */
+model Product {
+  id          String   @id @default(uuid())
+  name        String // Nome do produto
+  description String // Descrição detalhada
+  price       Float // Preço unitário (ex: 49.90)
+  imageUrl    String // URL da imagem do produto
+  ingredients String[] // Lista de ingredientes (array de texto)
+
+  // Relação com itens de pedido (tabela intermediária)
+  orderProducts OrderProduct[]
+
+  // Chaves estrangeiras
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  menuCategoryId String
+  menuCategory   MenuCategory @relation(fields: [menuCategoryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/**
+ * @model Order
+ * Representa um pedido feito por um cliente.
+ * Chave primária: Int com autoincrement() → ideal para pedidos sequenciais
+ * Relações:
+ * - N:1 com Restaurant
+ * - 1:N com OrderProduct (um pedido tem vários itens)
+ * Campos:
+ * - total: soma do valor dos itens
+ * - status: usa enum OrderStatus (padrão: PENDING)
+ * - consumptionMethod: como o cliente vai consumir (retirada ou no local)
+ */
+model Order {
+  id Int @id @default(autoincrement()) // ID numérico sequencial (1, 2, 3...)
+
+  total             Float // Valor total do pedido
+  status            OrderStatus       @default(PENDING) // Status atual do pedido
+  consumptionMethod ConsumptionMethod // TAKEAWAY ou DINE_IN
+  restaurantId      String
+  restaurant        Restaurant        @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  orderProducts OrderProduct[] // Itens que compõem o pedido
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 3 Enums para modelar nossas tabelas e campos especiais
+
+/**
+ * @model OrderProduct
+ * Tabela de junção (intermediária) entre Order e Product.
+ * Permite ter vários produtos em um pedido, com quantidade e preço unitário no momento do pedido.
+ * Importante: o preço é salvo aqui para preservar o valor histórico (evita problemas se o preço do produto mudar depois)
+ * Relações:
+ * - N:1 com Product
+ * - N:1 com Order
+ * onDelete: Cascade → se pedido ou produto for excluído, o item também é
+ */
+model OrderProduct {
+  id        String  @id @default(uuid()) // ID único do item no pedido
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String // Referência ao produto
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   Int // Referência ao pedido
+  quantity  Int // Quantidade desse produto no pedido
+  price     Float // Preço unitário no momento da compra
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/**
+ * @enum OrderStatus
+ * Define os possíveis estados de um pedido.
+ * Valores:
+ * - PENDING: aguardando confirmação/preparo
+ * - IN_PREPARATION: sendo preparado
+ * - FINISHED: pronto/entregue
+ * - CANCELLED: cancelado
+ */
+enum OrderStatus {
+  PENDING
+  IN_PREPARATION
+  FINISHED
+  CANCELLED
+}
+
+/**
+ * @enum ConsumptionMethod
+ * Define como o cliente vai consumir o pedido.
+ * Valores:
+ * - TAKEAWAY: retirada no local
+ * - DINE_IN: consumo no restaurante
+ */
+enum ConsumptionMethod {
+  TAKEAWAY
+  DINE_IN
+}
