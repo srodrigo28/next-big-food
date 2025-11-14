@@ -13,58 +13,78 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Restaurant{
-  id String @id @default(uuid())
-  name String @unique
-  slug String
-  description String
+model Restaurant {
+  id             String @id @default(uuid())
+  name           String @unique
+  slug           String
+  description    String
   avatarImageUrl String
-  coverImageUrl String
+  coverImageUrl  String
 
   menuCategories MenuCategory[]
-  products Product[]
+  products       Product[]
+  orders         Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model MenuCategory{
-  id String @id @default(uuid())
-  name String
-
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+model MenuCategory {
+  id           String     @id @default(uuid())
+  name         String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId String
-
-  products Product[]
+  products     Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Product {
-  id String @id @default(uuid())
-  name String
+  id          String   @id @default(uuid())
+  name        String
   description String
-  price Float
-  imageUrl String
+  price       Float
+  imageUrl    String
   ingredients String[]
 
+  orderProducts OrderProduct[]
+
   restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
 
   menuCategoryId String
-  menuCategory MenuCategory @relation(fields: [menuCategoryId], references: [id])
+  menuCategory   MenuCategory @relation(fields: [menuCategoryId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Order{
-  id String @id @default(uuid())
+model Order {
+  id Int @id @default(autoincrement())
   // Add other fields as necessary
 
-  total Float
-  status OrderStatus @default(PENDING)
+  total             Float
+  status            OrderStatus       @default(PENDING)
+  consumptionMethod ConsumptionMethod
+  restaurantId      String
+  restaurant        Restaurant        @relation(fields: [restaurantId], references: [id])
+  orderProducts     OrderProduct[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderProduct {
+  id String @id @default(uuid())
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  order    Order @relation(fields: [orderId], references: [id])
+  orderId  Int
+  quantity Int
+  price    Float
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -72,7 +92,12 @@ model Order{
 
 enum OrderStatus {
   PENDING
-  IN_PROGRESS
+  IN_PREPARATION
   FINISHED
   CANCELLED
+}
+
+enum ConsumptionMethod {
+  TAKEAWAY
+  DINE_IN
 }
