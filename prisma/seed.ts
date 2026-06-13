@@ -16,8 +16,8 @@ const main = async () => {
     await tx.restaurant.deleteMany();
     const restaurant = await tx.restaurant.create({
       data: {
-        name: "FSW Donalds",
-        slug: "fsw-donalds",
+        name: "ZapFood",
+        slug: "zap-food",
         description: "O melhor fast food do mundo",
         avatarImageUrl:
           "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQvcNP9rHlEJu1vCY5kLqzjf29HKaeN78Z6pRy",
@@ -37,14 +37,14 @@ const main = async () => {
 
     const adminUser = await tx.user.upsert({
       where: {
-        email: "admin@nextbigfood.local",
+        email: "admin@zapfood.local",
       },
       update: {
-        name: "Admin Next Big Food",
+        name: "Admin ZapFood",
       },
       create: {
-        name: "Admin Next Big Food",
-        email: "admin@nextbigfood.local",
+        name: "Admin ZapFood",
+        email: "admin@zapfood.local",
         passwordHash: hashPassword("admin123"),
       },
     });

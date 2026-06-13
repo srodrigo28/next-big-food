@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { requireAdminSession } from "@/lib/admin-auth";
 import { db } from "@/lib/prisma";
+import { getPublicRestaurantSlug } from "@/lib/restaurant-slug";
 
 const tableActions = [
   {
@@ -33,6 +34,7 @@ const tableActions = [
 
 const TablesPage = async () => {
   const { restaurant } = await requireAdminSession();
+  const publicSlug = getPublicRestaurantSlug();
 
   const tables = await db.restaurantTable.findMany({
     where: {
@@ -116,7 +118,7 @@ const TablesPage = async () => {
               <div className="rounded-md border p-3 text-xs text-muted-foreground">
                 <p className="font-semibold text-foreground">Link do QR</p>
                 <p className="mt-1 break-all">
-                  /{restaurant.slug}/table/{table.code}
+                  /{publicSlug}/table/{table.code}
                 </p>
               </div>
 

@@ -1,6 +1,6 @@
 # Ingredientes Personalizados, Adicionais e Alergias
 
-Documento de controle para criar um modulo de personalizacao de produtos no Next Big Food. Este modulo deve permitir que o estabelecimento configure ingredientes, adicionais pagos, remocoes permitidas e alertas de alergia para o cliente montar o pedido com seguranca.
+Documento de controle para criar um modulo de personalizacao de produtos no ZapFood. Este modulo deve permitir que o estabelecimento configure ingredientes, adicionais pagos, remocoes permitidas e alertas de alergia para o cliente montar o pedido com seguranca.
 
 Use este arquivo como checklist:
 

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { db } from "@/lib/prisma";
+import { getRestaurantLookupSlugs } from "@/lib/restaurant-slug";
 
 import RestaurantCategories from "./components/categories";
 import Footer from "./components/footer";
@@ -25,8 +26,12 @@ const RestaurantMenuPage = async ({
   if (!isConsumptionMethodValid(consumptionMethod)) {
     return notFound();
   }
-  const restaurant = await db.restaurant.findUnique({
-    where: { slug },
+  const restaurant = await db.restaurant.findFirst({
+    where: {
+      slug: {
+        in: getRestaurantLookupSlugs(slug),
+      },
+    },
     include: {
       menuCategories: {
         include: {

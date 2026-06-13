@@ -15,7 +15,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
         <aside className="hidden w-64 shrink-0 border-r bg-white p-5 md:block">
           <Link href="/admin/dashboard" className="block">
             <p className="text-xs font-semibold uppercase text-muted-foreground">
-              Next Big Food
+              ZapFood
             </p>
             <h1 className="mt-1 text-xl font-semibold">Admin</h1>
           </Link>

@@ -10,13 +10,15 @@ Use este arquivo como checklist de continuidade:
 
 Documentos de apoio:
 
+- [Index geral do projeto](index.md)
 - [Ingredientes personalizados, adicionais e alergias](ingredientes-personalizados.md)
+- [Compartilhe e ganhe: avaliacao, indicacao e pontos](compartilhe-ganhe.md)
 
 ## Resumo Executivo
 
 ### Progresso Geral
 
-- Modulos macro previstos: 12
+- Modulos macro previstos: 13
 - Modulos com base funcional entregue: 7
 - Modulos ainda sem base funcional: 5
 - Telas/rotas previstas: 26
@@ -38,6 +40,7 @@ Documentos de apoio:
 | Mesas e QR code | Parcial | Modelo de mesa, cadastro admin, status operacional | Abrir mesa via QR e vincular pedido a mesa |
 | Cozinha e preparo | Parcial | Tela cozinha com colunas e avanco de status | Setores, atrasos, notificacoes e tempos |
 | Caixa e pagamentos | Pendente | Stripe opcional no checkout cliente | Caixa admin, PIX, dinheiro, cartao presencial |
+| Fidelidade e crescimento | Pendente | Documento de avaliacao, indicacao e pontos | Carteira de pontos e compartilhamento |
 | Relatorios | Pendente | Nenhum relatorio dedicado | Vendas, produtos, mesas, clientes e exportacoes |
 | Operacao, testes e deploy | Pendente | Build, lint e migrations manuais | Testes E2E, logs, staging e producao |
 
@@ -115,6 +118,8 @@ Objetivo: permitir que varios estabelecimentos usem a mesma plataforma, cada um 
 
 Objetivo: preparar o schema para cadastros completos, operacao de pedidos e historico.
 
+Detalhamento de fidelidade, avaliacoes, indicacoes e pontos: [compartilhe-ganhe.md](compartilhe-ganhe.md).
+
 - [x] `Restaurant`
 - [x] `MenuCategory`
 - [x] `Product`
@@ -135,6 +140,10 @@ Objetivo: preparar o schema para cadastros completos, operacao de pedidos e hist
 - [ ] `AuditLog`
 - [ ] `Subscription`
 - [ ] `Plan`
+- [ ] `CustomerWallet`
+- [ ] `WalletTransaction`
+- [ ] `Review`
+- [ ] `ReferralCode`
 
 ### Campos a revisar
 
@@ -151,6 +160,7 @@ Objetivo: preparar o schema para cadastros completos, operacao de pedidos e hist
 Objetivo: experiencia simples para o cliente fazer pedido pelo celular via QR code, link ou slug do restaurante.
 
 Detalhamento de personalizacao de ingredientes, adicionais e alergias: [ingredientes-personalizados.md](ingredientes-personalizados.md).
+Detalhamento de avaliacao, compartilhamento e pontos: [compartilhe-ganhe.md](compartilhe-ganhe.md).
 
 ### Entrada
 
@@ -334,6 +344,17 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [ ] Relatorio de tempo medio de preparo
 - [ ] Exportar CSV
 - [ ] Exportar PDF
+
+### Fidelidade e Crescimento
+
+- [ ] Modulo compartilhe e ganhe conforme [compartilhe-ganhe.md](compartilhe-ganhe.md)
+- [ ] Avaliacoes de pedido
+- [ ] Carteira de pontos
+- [ ] Regras de pontos por avaliacao
+- [ ] Regras de pontos por compartilhamento
+- [ ] Regras de pontos por indicacao
+- [ ] Resgate parcial com pontos
+- [ ] Resgate total com pontos
 
 ## 5. Arquitetura de Rotas
 

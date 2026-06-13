@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { db } from "@/lib/prisma";
+import { isMatchingRestaurantSlug } from "@/lib/restaurant-slug";
 
 import ProductDetails from "./components/product-details";
 import ProductHeader from "./components/product-header";
@@ -26,7 +27,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   if (!product || !product.isAvailable) {
     return notFound();
   }
-  if (product.restaurant.slug.toUpperCase() !== slug.toUpperCase()) {
+  if (!isMatchingRestaurantSlug(product.restaurant.slug, slug)) {
     return notFound();
   }
   return (

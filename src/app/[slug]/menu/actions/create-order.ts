@@ -4,6 +4,7 @@ import { ConsumptionMethod } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 import { db } from "@/lib/prisma";
+import { getRestaurantLookupSlugs } from "@/lib/restaurant-slug";
 
 import { removeCpfPunctuation } from "../helpers/cpf";
 
@@ -20,9 +21,11 @@ interface CreateOrderInput {
 }
 
 export const createOrder = async (input: CreateOrderInput) => {
-  const restaurant = await db.restaurant.findUnique({
+  const restaurant = await db.restaurant.findFirst({
     where: {
-      slug: input.slug,
+      slug: {
+        in: getRestaurantLookupSlugs(input.slug),
+      },
     },
   });
   if (!restaurant) {

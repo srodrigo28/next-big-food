@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 
 import { db } from "@/lib/prisma";
+import { getRestaurantLookupSlugs } from "@/lib/restaurant-slug";
 
 interface TableQrPageProps {
   params: Promise<{
@@ -13,9 +14,11 @@ const TableQrPage = async ({ params }: TableQrPageProps) => {
   const { slug, tableCode } = await params;
   const normalizedTableCode = decodeURIComponent(tableCode).trim().toUpperCase();
 
-  const restaurant = await db.restaurant.findUnique({
+  const restaurant = await db.restaurant.findFirst({
     where: {
-      slug,
+      slug: {
+        in: getRestaurantLookupSlugs(slug),
+      },
     },
   });
 

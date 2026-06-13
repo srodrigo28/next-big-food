@@ -7,7 +7,7 @@ const Footer = () => {
         <CardContent className="px-5 py-3 text-center">
           <p className="text-sm text-gray-400">
             Desenvolvido com{" "}
-            <span className="font-bold text-[#FFB100]">Next Big Food</span>
+            <span className="font-bold text-[#FF2D20]">ZapFood</span>
           </p>
         </CardContent>
       </Card>

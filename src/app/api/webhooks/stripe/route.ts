@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 import { db } from "@/lib/prisma";
+import { getPublicRestaurantSlug } from "@/lib/restaurant-slug";
 
 export async function POST(request: Request) {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -46,7 +47,10 @@ export async function POST(request: Request) {
           },
         },
       });
-      revalidatePath(`/${order.restaurant.slug}/menu`);
+      revalidatePath(`/${getPublicRestaurantSlug()}/menu`);
+      if (order.restaurant.slug !== getPublicRestaurantSlug()) {
+        revalidatePath(`/${order.restaurant.slug}/menu`);
+      }
       break;
     }
 
@@ -72,7 +76,10 @@ export async function POST(request: Request) {
           },
         },
       });
-      revalidatePath(`/${order.restaurant.slug}/menu`);
+      revalidatePath(`/${getPublicRestaurantSlug()}/menu`);
+      if (order.restaurant.slug !== getPublicRestaurantSlug()) {
+        revalidatePath(`/${order.restaurant.slug}/menu`);
+      }
       break;
     }
   }

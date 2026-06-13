@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { requireAdminSession } from "@/lib/admin-auth";
 import { db } from "@/lib/prisma";
+import { getPublicRestaurantSlug } from "@/lib/restaurant-slug";
 
 const parseIngredients = (value: FormDataEntryValue | null) => {
   return String(value ?? "")
@@ -23,7 +24,8 @@ const parsePrice = (value: FormDataEntryValue | null) => {
 const revalidateCatalog = (slug?: string) => {
   revalidatePath("/admin/products");
   revalidatePath("/admin/categories");
-  if (slug) {
+  revalidatePath(`/${getPublicRestaurantSlug()}/menu`);
+  if (slug && slug !== getPublicRestaurantSlug()) {
     revalidatePath(`/${slug}/menu`);
   }
 };

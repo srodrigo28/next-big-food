@@ -1,6 +1,10 @@
-# Next Big Food
+# ZapFood
 
 Self-checkout de restaurante feito com Next.js, TypeScript, Prisma, Neon, Tailwind CSS e ShadCN UI.
+
+## Mapa do Projeto
+
+Use [index.md](index.md) como ponto de partida para acompanhar a sequencia de implementacao e os documentos de apoio.
 
 ## Funcionalidades
 
@@ -48,7 +52,7 @@ npx prisma db seed
 npm run dev
 ```
 
-Abra `http://localhost:3000`. A rota inicial redireciona para `/fsw-donalds`.
+Abra `http://localhost:3000`. A rota inicial mostra a tela start do ZapFood e o acesso de cliente segue para `/zap-food`.
 
 ## Stripe
 
@@ -73,7 +77,7 @@ http://localhost:3000/admin/login
 Credenciais iniciais criadas pela seed:
 
 ```bash
-admin@nextbigfood.local
+admin@zapfood.local
 admin123
 ```
 
