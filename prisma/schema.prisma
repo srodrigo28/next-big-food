@@ -24,6 +24,8 @@ model Restaurant {
   menuCategories MenuCategory[]
   products       Product[]
   orders         Order[]
+  tables         RestaurantTable[]
+  users          RestaurantUser[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -47,6 +49,7 @@ model Product {
   price       Float
   imageUrl    String
   ingredients String[]
+  isAvailable Boolean  @default(true)
 
   orderProducts OrderProduct[]
 
@@ -62,7 +65,6 @@ model Product {
 
 model Order {
   id Int @id @default(autoincrement())
-  // Add other fields as necessary
 
   total             Float
   status            OrderStatus       @default(PENDING)
@@ -70,9 +72,62 @@ model Order {
   restaurantId      String
   restaurant        Restaurant        @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   orderProducts     OrderProduct[]
+  customerName      String?
+  customerCpf       String?
+  tableId           String?
+  table             RestaurantTable?  @relation(fields: [tableId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model User {
+  id           String           @id @default(uuid())
+  name         String
+  email        String           @unique
+  passwordHash String
+  restaurants  RestaurantUser[]
+  sessions     AdminSession[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model RestaurantUser {
+  id           String     @id @default(uuid())
+  role         AdminRole  @default(OWNER)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([userId, restaurantId])
+}
+
+model AdminSession {
+  id           String   @id @default(uuid())
+  tokenHash    String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
+model RestaurantTable {
+  id           String      @id @default(uuid())
+  name         String
+  code         String
+  status       TableStatus @default(AVAILABLE)
+  seats        Int?
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
+  orders       Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([restaurantId, code])
 }
 
 model OrderProduct {
@@ -93,8 +148,28 @@ model OrderProduct {
 enum OrderStatus {
   PENDING
   IN_PREPARATION
+  PAYMENT_CONFIRMED
+  PAYMENT_FAILED
+  READY
+  DELIVERED
   FINISHED
   CANCELLED
+}
+
+enum TableStatus {
+  AVAILABLE
+  OCCUPIED
+  WAITING_ORDER
+  IN_SERVICE
+  WAITING_PAYMENT
+}
+
+enum AdminRole {
+  OWNER
+  MANAGER
+  CASHIER
+  KITCHEN
+  WAITER
 }
 
 enum ConsumptionMethod {

@@ -38,7 +38,7 @@ rodrigoexer8@gmail.com
 
 ##### neon
 ```
-DATABASE_URL="postgresql://neondb_owner:npg_ptavjZC37YTq@ep-crimson-morning-acrp7yug-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require"
 ```
 
 #### instalando ts-node

@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+const { randomBytes, scryptSync } = require("crypto");
 const { PrismaClient } = require("@prisma/client");
 
 const prismaClient = new PrismaClient();
+
+const hashPassword = (password: string) => {
+  const salt = randomBytes(16).toString("hex");
+  const hash = scryptSync(password, salt, 64).toString("hex");
+  return `${salt}:${hash}`;
+};
 
 const main = async () => {
   await prismaClient.$transaction(async (tx: any) => {
@@ -18,6 +25,47 @@ const main = async () => {
           "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQac8bHYlkBUjlHSKiuseLm2hIFzVY0OtxEPnw",
       },
     });
+
+    await tx.restaurantTable.createMany({
+      data: Array.from({ length: 8 }).map((_, index) => ({
+        name: `Mesa ${String(index + 1).padStart(2, "0")}`,
+        code: `MESA-${String(index + 1).padStart(2, "0")}`,
+        seats: index < 4 ? 4 : 2,
+        restaurantId: restaurant.id,
+      })),
+    });
+
+    const adminUser = await tx.user.upsert({
+      where: {
+        email: "admin@nextbigfood.local",
+      },
+      update: {
+        name: "Admin Next Big Food",
+      },
+      create: {
+        name: "Admin Next Big Food",
+        email: "admin@nextbigfood.local",
+        passwordHash: hashPassword("admin123"),
+      },
+    });
+
+    await tx.restaurantUser.upsert({
+      where: {
+        userId_restaurantId: {
+          userId: adminUser.id,
+          restaurantId: restaurant.id,
+        },
+      },
+      update: {
+        role: "OWNER",
+      },
+      create: {
+        userId: adminUser.id,
+        restaurantId: restaurant.id,
+        role: "OWNER",
+      },
+    });
+
     const combosCategory = await tx.menuCategory.create({
       data: {
         name: "Combos",
