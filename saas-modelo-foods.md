@@ -13,6 +13,7 @@ Documentos de apoio:
 - [Index geral do projeto](index.md)
 - [Ingredientes personalizados, adicionais e alergias](ingredientes-personalizados.md)
 - [Compartilhe e ganhe: avaliacao, indicacao e pontos](compartilhe-ganhe.md)
+- [ASAAS - Pagamentos PIX](asaas-pagamentos.md)
 
 ## Resumo Executivo
 
@@ -21,10 +22,11 @@ Documentos de apoio:
 - Modulos macro previstos: 13
 - Modulos com base funcional entregue: 7
 - Modulos ainda sem base funcional: 5
-- Telas/rotas previstas: 26
-- Telas/rotas feitas: 14
+- Telas/rotas previstas: 28
+- Telas/rotas feitas: 16
 - Telas/rotas pendentes: 12
-- Proxima prioridade: criar detalhe admin do pedido e filtros avancados
+- Proxima prioridade: validar pagamento ASAAS de ponta a ponta e iniciar modulo de
+  fidelidade e pontos ([compartilhe-ganhe.md](compartilhe-ganhe.md))
 
 ### Resumo por Modulo
 
@@ -35,7 +37,7 @@ Documentos de apoio:
 | Cliente mobile | Parcial | Home, consumo, menu, produto, sacola, pedido, historico | QR code de mesa e pedido em tempo real |
 | Admin web | Parcial | Login, layout, dashboard, pedidos, cozinha, mesas, produtos, categorias | Usuarios, relatorios e configuracoes |
 | Autenticacao admin | Parcial | Login, logout, sessao httpOnly, usuario vinculado ao restaurante | Recuperacao de senha e permissoes por perfil |
-| Cardapio e cadastros | Parcial | Cardapio publico, CRUD admin de categorias/produtos | Ingredientes personalizados, adicionais, alergias |
+| Cardapio e cadastros | Parcial | Cardapio publico, CRUD admin de categorias/produtos, ingredientes personalizados, adicionais e alergias (admin, cliente e pedido) | Cadastro de combos e promocoes |
 | Pedidos | Parcial | Criacao, historico, admin pedidos, troca de status | Detalhe do pedido e filtros avancados |
 | Mesas e QR code | Parcial | Modelo de mesa, cadastro admin, status operacional | Abrir mesa via QR e vincular pedido a mesa |
 | Cozinha e preparo | Parcial | Tela cozinha com colunas e avanco de status | Setores, atrasos, notificacoes e tempos |
@@ -49,8 +51,8 @@ Documentos de apoio:
 | Area | Previstas | Feitas | Pendentes |
 | --- | ---: | ---: | ---: |
 | Cliente | 10 | 6 | 4 |
-| Admin | 16 | 8 | 8 |
-| Total | 26 | 14 | 12 |
+| Admin | 18 | 10 | 8 |
+| Total | 28 | 16 | 12 |
 
 ### Telas Cliente
 
@@ -59,7 +61,7 @@ Documentos de apoio:
 - [x] `/{slug}/menu`
 - [x] `/{slug}/menu/{productid}`
 - [x] `/{slug}/orders`
-- [ ] `/{slug}/order/{orderId}`
+- [x] `/{slug}/order/{orderId}`
 - [x] `/{slug}/table/{tableCode}`
 - [ ] `/{slug}/checkout`
 - [ ] `/{slug}/payment/success`
@@ -75,9 +77,11 @@ Documentos de apoio:
 - [x] `/admin/tables`
 - [ ] `/admin/restaurants`
 - [ ] `/admin/restaurants/{restaurantId}`
-- [ ] `/admin/orders/{orderId}`
+- [x] `/admin/orders/{orderId}`
 - [x] `/admin/products`
+- [x] `/admin/products/{productId}/customization`
 - [x] `/admin/categories`
+- [x] `/admin/ingredients`
 - [ ] `/admin/customers`
 - [ ] `/admin/reports`
 - [ ] `/admin/settings`
@@ -149,7 +153,7 @@ Detalhamento de fidelidade, avaliacoes, indicacoes e pontos: [compartilhe-ganhe.
 
 - [ ] Trocar dinheiro de `Float` para `Decimal`
 - [ ] Padronizar CPF/telefone/email do cliente
-- [ ] Adicionar numero ou codigo humano para pedido
+- [x] Adicionar numero ou codigo humano para pedido
 - [x] Adicionar origem do pedido: mesa, balcao, delivery, retirada
 - [ ] Adicionar timestamps de preparo: recebido, aceito, em preparo, pronto, entregue, cancelado
 - [ ] Adicionar observacoes por item e por pedido
@@ -178,11 +182,11 @@ Detalhamento de avaliacao, compartilhamento e pontos: [compartilhe-ganhe.md](com
 - [x] Listar produtos por categoria
 - [x] Detalhar produto
 - [x] Adicionar item na sacola
-- [ ] Buscar produto por texto
+- [x] Buscar produto por texto
 - [ ] Filtrar por disponibilidade
-- [ ] Exibir adicionais/opcionais
-- [ ] Exibir observacao por item
-- [ ] Exibir produtos indisponiveis com bloqueio visual
+- [x] Exibir adicionais/opcionais
+- [x] Exibir observacao por item
+- [x] Exibir produtos indisponiveis com bloqueio visual
 - [ ] Exibir combos e promocoes
 
 ### Sacola
@@ -218,11 +222,15 @@ Detalhamento de avaliacao, compartilhamento e pontos: [compartilhe-ganhe.md](com
 
 ### Pagamento
 
+Detalhamento completo do fluxo ASAAS: [asaas-pagamentos.md](asaas-pagamentos.md)
+
 - [x] Checkout Stripe opcional
-- [ ] Pagamento na mesa
+- [x] PIX via ASAAS (QR code + copia-e-cola + webhook de confirmacao)
+- [x] Exibir expiracao do QR code na tela
+- [ ] Reemitir QR code expirado
+- [ ] Pagamento na mesa (dinheiro, cartao maquininha - modulo caixa admin)
 - [ ] Pagamento no balcao
-- [ ] PIX
-- [ ] Cartao online
+- [ ] Cartao online via ASAAS
 - [ ] Dividir conta por pessoa
 - [ ] Registrar comprovante/transacao
 
@@ -250,13 +258,13 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [x] Pedidos pendentes
 - [x] Pedidos em preparo
 - [x] Pedidos prontos
-- [ ] Ticket medio
-- [ ] Produtos mais vendidos
+- [x] Ticket medio
+- [x] Produtos mais vendidos
 - [ ] Alertas operacionais
 
 ### Cadastros
 
-- [ ] Modulo de ingredientes personalizados conforme [ingredientes-personalizados.md](ingredientes-personalizados.md)
+- [x] Modulo de ingredientes personalizados conforme [ingredientes-personalizados.md](ingredientes-personalizados.md)
 - [ ] Cadastro de restaurante
 - [ ] Edicao de dados do restaurante
 - [ ] Upload/URL de logo
@@ -266,7 +274,7 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [x] Edicao de produtos
 - [x] Ativar/desativar produto
 - [x] Marcar produto como indisponivel
-- [ ] Cadastro de adicionais
+- [x] Cadastro de adicionais
 - [ ] Cadastro de combos
 - [ ] Cadastro de promocoes
 - [x] Cadastro de mesas
@@ -277,17 +285,17 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 ### Pedidos
 
 - [ ] Listagem de pedidos em tempo real
-- [ ] Filtros por status
-- [ ] Filtros por mesa
-- [ ] Filtros por data
-- [ ] Filtros por cliente
-- [ ] Detalhe do pedido
+- [x] Filtros por status
+- [x] Filtros por mesa
+- [x] Filtros por data (hoje, semana, mes, todos)
+- [x] Filtros por cliente (busca por nome)
+- [x] Detalhe do pedido (/admin/orders/{orderId})
 - [ ] Aceitar pedido
 - [ ] Recusar pedido
 - [x] Enviar para preparo
 - [x] Marcar como pronto
 - [x] Marcar como entregue
-- [ ] Cancelar pedido com motivo
+- [x] Cancelar pedido com motivo
 - [ ] Reimprimir pedido
 - [ ] Adicionar item manualmente pelo admin
 - [ ] Editar item antes de aceitar
@@ -313,9 +321,9 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [x] Coluna: novos pedidos
 - [x] Coluna: em preparo
 - [x] Coluna: pronto
-- [ ] Coluna: entregue
+- [x] Coluna: entregue
 - [x] Ordenar por horario de entrada
-- [ ] Destacar pedidos atrasados
+- [x] Destacar pedidos atrasados
 - [ ] Separar por setor: cozinha, bebidas, sobremesas
 - [ ] Emitir som/notificacao para pedido novo
 - [x] Botao de avancar etapa
@@ -365,7 +373,7 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [x] `/{slug}/menu`
 - [x] `/{slug}/menu/{productid}`
 - [x] `/{slug}/orders`
-- [ ] `/{slug}/order/{orderId}`
+- [x] `/{slug}/order/{orderId}`
 - [x] `/{slug}/table/{tableCode}`
 - [ ] `/{slug}/checkout`
 - [ ] `/{slug}/payment/success`
@@ -379,11 +387,13 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [ ] `/admin/restaurants`
 - [ ] `/admin/restaurants/{restaurantId}`
 - [x] `/admin/orders`
-- [ ] `/admin/orders/{orderId}`
+- [x] `/admin/orders/{orderId}`
 - [x] `/admin/kitchen`
 - [x] `/admin/tables`
 - [x] `/admin/products`
+- [x] `/admin/products/{productId}/customization`
 - [x] `/admin/categories`
+- [x] `/admin/ingredients`
 - [ ] `/admin/customers`
 - [ ] `/admin/reports`
 - [ ] `/admin/settings`
@@ -408,7 +418,7 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [ ] `CurrentOrderStatus`
 - [ ] `TableStatus`
 - [ ] `ProductSearch`
-- [ ] `ProductOptions`
+- [x] `ProductOptions` (implementado dentro de `ProductDetails`: remocao de ingredientes, adicionais, observacao e alergia)
 - [ ] `PaymentMethodSelector`
 
 ### Admin
@@ -519,7 +529,7 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 
 - [x] Criar status operacional completo
 - [x] Criar tela admin de pedidos
-- [ ] Criar detalhe do pedido
+- [x] Criar detalhe do pedido (/admin/orders/{orderId})
 - [x] Criar action para atualizar status
 - [x] Criar tela cozinha
 - [ ] Criar fluxo de preparo
@@ -535,16 +545,32 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [ ] Controlar consumo por mesa
 - [x] Liberar mesa pelo admin
 
-### Fase 4 - Cliente Completo
+### Fase 4 - Pagamentos ASAAS
+
+Detalhamento: [asaas-pagamentos.md](asaas-pagamentos.md)
+
+- [x] Integrar ASAAS como provedor de pagamento
+- [x] Criar cliente ASAAS por CPF (find or create)
+- [x] Gerar cobranca PIX com QR code
+- [x] Salvar asaasChargeId no pedido
+- [x] Webhook de confirmacao de pagamento
+- [x] Atualizar status para PAYMENT_CONFIRMED via webhook
+- [x] Exibir QR code e copia-e-cola na finalizacao do pedido
+- [x] Melhorar historico de pedidos (numero, todos os status, badge de pago)
+- [ ] Registrar webhook no painel ASAAS com URL de producao
+- [ ] Testar fluxo ponta a ponta com pagamento real
+- [x] Exibir expiracao do QR code na tela
+- [ ] Permitir reemitir QR code expirado
+
+### Fase 5 - Cliente Completo
 
 - [ ] Persistir sacola
-- [ ] Mostrar pedido atual
-- [ ] Atualizar status do pedido para cliente
-- [ ] Permitir observacoes conforme [ingredientes-personalizados.md](ingredientes-personalizados.md)
-- [ ] Permitir adicionais conforme [ingredientes-personalizados.md](ingredientes-personalizados.md)
-- [ ] Melhorar historico de pedidos
+- [x] Mostrar pedido atual em tempo real (/{slug}/order/{orderId} com auto-refresh 8s)
+- [x] Atualizar status do pedido para cliente (progress steps com icons)
+- [x] Permitir observacoes conforme [ingredientes-personalizados.md](ingredientes-personalizados.md)
+- [x] Permitir adicionais conforme [ingredientes-personalizados.md](ingredientes-personalizados.md)
 
-### Fase 5 - Caixa, Relatorios e SaaS Comercial
+### Fase 6 - Caixa, Relatorios e SaaS Comercial
 
 - [ ] Criar modulo de caixa
 - [ ] Criar metodos de pagamento
@@ -557,7 +583,7 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 
 - [ ] Auth: qual provedor usar?
 - [ ] Realtime: polling, SSE ou WebSocket?
-- [ ] Pagamentos: Stripe, Mercado Pago, PIX manual ou todos?
+- [x] Pagamentos: ASAAS escolhido como provedor principal (PIX implementado)
 - [ ] Multi-tenant: slug, subdominio ou dominio proprio?
 - [ ] Admin: rotas por `/admin/{slug}` ou por usuario logado?
 - [ ] Mobile cliente: apenas PWA web ou app nativo futuro?
@@ -583,10 +609,76 @@ Objetivo: painel para o estabelecimento controlar operacao, cadastros, mesas, pe
 - [x] CRUD admin inicial de categorias criado
 - [x] CRUD admin inicial de produtos criado
 
-Proxima prioridade sugerida:
+Proxima prioridade sugerida (atualizada em 2026-06-13):
 
 - [x] Vincular pedido do cliente a mesa via QR code
 - [x] Criar CRUD de produtos e categorias
-- [ ] Criar detalhe admin do pedido
-- [ ] Criar filtros avancados de pedidos
+- [x] Integrar ASAAS PIX com QR code e webhook de confirmacao
+- [x] Exibir numero do pedido em todas as telas
+- [x] Padronizar paleta de cores com variaveis CSS (--brand-*)
+- [x] Aplicar paleta ao admin (--primary vermelho ZapFood)
+- [x] AppShell com moldura de telefone e PWA install detection
+- [x] Header fixo com sticky no topo da tela do restaurante
+- [x] Menu admin exibido somente apos login
+- [ ] Registrar webhook ASAAS no painel e testar pagamento real
+- [x] Criar detalhe admin do pedido (/admin/orders/{orderId})
+- [x] Criar filtros avancados de pedidos (status, data, nome do cliente)
 - [ ] Criar permissoes por usuario do estabelecimento
+
+### 2026-06-13 - Pagamentos e Interface
+
+- [x] Fluxo PIX ASAAS implementado do zero
+- [x] QR code exibido na finalizacao do pedido com copia-e-cola
+- [x] Webhook ASAAS implementado em /api/webhooks/asaas
+- [x] Numero do pedido exibido como #0042 em todas as telas do cliente
+- [x] Todos os status com labels e cores corretas no historico
+- [x] Badge verde "Pagamento confirmado" no historico do cliente
+- [x] clearCart() adicionado ao contexto do carrinho
+- [x] asaasChargeId adicionado ao banco (migration aplicada)
+- [x] Paleta de cores centralizada em variaveis CSS --brand-*
+- [x] AppShell com moldura de telefone + PWA install sheet
+- [x] Header sticky no topo da tela do restaurante (/zap-food)
+- [x] Admin sem menu/sidebar na tela de login
+- [x] Detalhe admin do pedido (/admin/orders/{orderId}) com grid, itens, cliente, mesa, pagamento
+- [x] Filtros avancados no admin de pedidos (status, periodo, nome do cliente)
+- [x] Tela de status do pedido para cliente (/{slug}/order/{orderId}) com progress steps e auto-refresh
+- [x] Link do historico de pedidos para tela de status do pedido atual
+- [x] Botao "Acompanhar pedido" no dialogo PIX navega para status do pedido
+
+### 2026-06-14 - Personalizacao de Produtos (Fase 2 e 3)
+
+- [x] `ALLERGY_LABELS` centralizado em `src/constants/allergy.ts`
+- [x] Tela do produto exibe ingredientes removiveis, adicionais com stepper de
+  quantidade, observacao do item e pergunta de alergia (checkboxes + observacao)
+- [x] Mensagem alternativa quando o produto nao tem personalizacao configurada
+- [x] Carrinho com `cartItemId`, `unitPrice` (preco + adicionais) e resumo de
+  personalizacao por item, permitindo o mesmo produto com configuracoes diferentes
+- [x] `createOrder` recalcula preco no servidor e grava personalizacao com snapshot
+  de nomes e valores (`OrderProductCustomization`, `OrderProductRemovedIngredient`,
+  `OrderProductAddon`)
+- [x] `/admin/orders/{orderId}` e `/admin/kitchen` exibem ingredientes removidos,
+  adicionais, observacao e alerta de alergia
+- [x] `/{slug}/order/{orderId}` e `/{slug}/orders` exibem resumo da personalizacao
+  e alerta de alergia para o cliente
+- [x] Botao "Personalização" adicionado em `/admin/products` linkando para
+  `/admin/products/{productId}/customization`
+- [x] Fluxo validado de ponta a ponta com dados de teste (criados e removidos depois)
+
+### 2026-06-14 - Pagamentos, Pedidos Admin, Cozinha, Cardapio e Dashboard
+
+- [x] Campos `pixExpiresAt` e `cancellationReason` adicionados ao `Order`
+  (migration `add_pix_expiration_and_cancel_reason`)
+- [x] `createAsaasCharge` grava `pixExpiresAt` no pedido; drawer de finalizacao e
+  `/{slug}/order/{orderId}` exibem o horario de expiracao do QR code PIX (e aviso
+  de QR expirado quando aplicavel)
+- [x] `/admin/orders` ganhou filtro por mesa (botoes por mesa + `tableId` no
+  where)
+- [x] `/admin/kitchen` ganhou coluna "Entregues" (pedidos do dia) e destaque
+  "Atrasado" para pedidos novos/em preparo com mais de 15 minutos
+- [x] `/{slug}/menu` ganhou busca por nome/descricao (todas as categorias) e
+  passou a listar produtos indisponiveis com badge "Indisponivel" e card
+  desabilitado (sem link), em vez de ocultar
+- [x] `/admin/dashboard` ganhou metricas "Ticket medio" e card "Produtos mais
+  vendidos" (`db.orderProduct.groupBy`)
+- [x] Cancelamento de pedido em `/admin/orders` e `/admin/orders/{orderId}` aceita
+  motivo opcional, gravado em `cancellationReason` e exibido no detalhe do pedido

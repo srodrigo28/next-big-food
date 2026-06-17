@@ -6,9 +6,10 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/prisma";
 import { requireAdminSession } from "@/lib/admin-auth";
 
-export const updateOrderStatus = async (
+const applyOrderStatus = async (
   orderId: number,
   status: OrderStatus,
+  extraData: { cancellationReason?: string | null } = {},
 ) => {
   const session = await requireAdminSession();
   const existingOrder = await db.order.findFirst({
@@ -31,6 +32,7 @@ export const updateOrderStatus = async (
     },
     data: {
       status,
+      ...extraData,
     },
     include: {
       table: true,
@@ -56,10 +58,22 @@ export const updateOrderStatus = async (
   revalidatePath("/admin");
   revalidatePath("/admin/dashboard");
   revalidatePath("/admin/orders");
+  revalidatePath(`/admin/orders/${orderId}`);
   revalidatePath("/admin/kitchen");
   revalidatePath("/admin/tables");
 };
 
-export const cancelOrder = async (orderId: number) => {
-  await updateOrderStatus(orderId, OrderStatus.CANCELLED);
+export const updateOrderStatus = async (
+  orderId: number,
+  status: OrderStatus,
+) => {
+  await applyOrderStatus(orderId, status);
+};
+
+export const cancelOrder = async (orderId: number, formData: FormData) => {
+  const reason = formData.get("reason");
+  await applyOrderStatus(orderId, OrderStatus.CANCELLED, {
+    cancellationReason:
+      typeof reason === "string" && reason.trim() ? reason.trim() : null,
+  });
 };

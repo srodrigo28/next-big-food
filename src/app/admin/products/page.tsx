@@ -1,3 +1,6 @@
+import { Settings2Icon } from "lucide-react";
+import Link from "next/link";
+
 import {
   createProduct,
   toggleProductAvailability,
@@ -205,11 +208,19 @@ const ProductsPage = async () => {
                 </div>
               </form>
 
-              <form action={toggleProductAvailability.bind(null, product.id)}>
-                <Button size="sm" variant={product.isAvailable ? "outline" : "default"}>
-                  {product.isAvailable ? "Marcar indisponivel" : "Marcar disponivel"}
+              <div className="flex flex-wrap gap-2">
+                <form action={toggleProductAvailability.bind(null, product.id)}>
+                  <Button size="sm" variant={product.isAvailable ? "outline" : "default"}>
+                    {product.isAvailable ? "Marcar indisponivel" : "Marcar disponivel"}
+                  </Button>
+                </form>
+                <Button size="sm" variant="secondary" asChild>
+                  <Link href={`/admin/products/${product.id}/customization`}>
+                    <Settings2Icon className="h-3.5 w-3.5" />
+                    Personalização
+                  </Link>
                 </Button>
-              </form>
+              </div>
             </CardContent>
           </Card>
         ))}

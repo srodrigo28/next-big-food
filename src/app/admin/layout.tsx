@@ -9,9 +9,13 @@ import { signOutAdmin } from "./login/actions";
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getAdminSession();
 
+  if (!session) {
+    return <div className="min-h-screen w-full bg-gray-100">{children}</div>;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="mx-auto flex min-h-screen max-w-[1400px]">
+    <div className="min-h-screen w-full bg-gray-100">
+      <div className="mx-auto flex min-h-screen w-full max-w-[1400px]">
         <aside className="hidden w-64 shrink-0 border-r bg-white p-5 md:block">
           <Link href="/admin/dashboard" className="block">
             <p className="text-xs font-semibold uppercase text-muted-foreground">
@@ -29,20 +33,18 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  {session?.restaurant.name ?? "Operacao do estabelecimento"}
+                  {session.restaurant.name}
                 </p>
                 <h2 className="text-lg font-semibold">
                   Controle de pedidos, cozinha e mesas
                 </h2>
               </div>
               <div className="flex flex-col gap-3 md:items-end">
-                {session && (
-                  <form action={signOutAdmin}>
-                    <Button size="sm" variant="outline">
-                      Sair
-                    </Button>
-                  </form>
-                )}
+                <form action={signOutAdmin}>
+                  <Button size="sm" variant="outline">
+                    Sair
+                  </Button>
+                </form>
                 <div className="flex gap-2 md:hidden">
                   <AdminNav />
                 </div>

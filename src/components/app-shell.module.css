@@ -2,7 +2,12 @@
   align-items: center;
   background:
     radial-gradient(circle at 50% 15%, rgb(255 45 32 / 0.35), transparent 30rem),
-    linear-gradient(180deg, #1a1110 0%, #f3f4f6 55%, #f3f4f6 100%);
+    linear-gradient(
+      180deg,
+      var(--brand-shell-bg-top) 0%,
+      var(--brand-surface-muted) 55%,
+      var(--brand-surface-muted) 100%
+    );
   display: flex;
   justify-content: center;
   min-height: 100svh;
@@ -12,11 +17,11 @@
 }
 
 .phone {
-  background: #050505;
-  border: 4px solid #232323;
+  background: var(--brand-shell-frame);
+  border: 4px solid var(--brand-shell-border);
   border-radius: clamp(0px, 5.2vw, 60px);
   box-shadow:
-    0 0 0 2px #666,
+    0 0 0 2px var(--brand-shell-ring),
     0 28px 90px rgb(0 0 0 / 0.34);
   height: min(100svh - 12px, 1100px);
   max-width: 480px;
@@ -26,9 +31,9 @@
 }
 
 .screen {
-  background: #fff;
+  background: var(--brand-surface);
   border-radius: clamp(0px, 4.4vw, 48px);
-  color: #111317;
+  color: var(--brand-text-strong);
   height: 100%;
   overflow: auto;
   position: relative;
@@ -68,12 +73,12 @@
 }
 
 .installSheet {
-  background: #fff;
-  border: 1px solid #f0d9d6;
+  background: var(--brand-surface);
+  border: 1px solid var(--brand-primary-muted);
   border-radius: 26px 26px 0 0;
   box-shadow: 0 -24px 72px rgb(18 29 49 / 0.24);
   box-sizing: border-box;
-  color: #101216;
+  color: var(--brand-text-strong);
   max-width: 480px;
   padding: 15px 18px max(18px, env(safe-area-inset-bottom));
   pointer-events: auto;
@@ -82,7 +87,7 @@
 }
 
 .installSheet::before {
-  background: #f0d2cf;
+  background: var(--brand-primary-muted);
   border-radius: 999px;
   content: "";
   display: block;
@@ -92,10 +97,10 @@
 }
 
 .installClose {
-  background: #f7f1f0;
+  background: var(--brand-surface-alt);
   border: 0;
   border-radius: 50%;
-  color: #343941;
+  color: var(--brand-text-soft);
   cursor: pointer;
   display: grid;
   font-size: 14px;
@@ -127,7 +132,7 @@
 
 .installLead p,
 .installHint {
-  color: #58616d;
+  color: var(--brand-text-muted);
   font-size: 13px;
   letter-spacing: 0;
   line-height: 1.35;
@@ -136,10 +141,10 @@
 
 .installMark {
   align-items: center;
-  background: #ff2d20;
+  background: var(--brand-primary);
   border-radius: 16px;
   box-shadow: 0 9px 24px rgb(255 45 32 / 0.3);
-  color: #fff;
+  color: var(--brand-primary-foreground);
   display: grid;
   font-size: 26px;
   height: 54px;
@@ -148,8 +153,8 @@
 }
 
 .installHint {
-  background: #fff5f4;
-  border: 1px solid #fde2df;
+  background: var(--brand-primary-soft);
+  border: 1px solid var(--brand-primary-soft-border);
   border-radius: 14px;
   margin-top: 13px;
   padding: 10px 12px;
@@ -164,10 +169,10 @@
 
 .installActions button {
   align-items: center;
-  background: #f3f4f6;
+  background: var(--brand-surface-muted);
   border: 0;
   border-radius: 15px;
-  color: #20242b;
+  color: var(--brand-text-soft);
   cursor: pointer;
   display: flex;
   font-size: 14px;
@@ -180,7 +185,7 @@
 }
 
 .installActions button:last-child {
-  background: #ff2d20;
+  background: var(--brand-primary);
   box-shadow: 0 13px 28px rgb(255 45 32 / 0.32);
-  color: #fff;
+  color: var(--brand-primary-foreground);
 }

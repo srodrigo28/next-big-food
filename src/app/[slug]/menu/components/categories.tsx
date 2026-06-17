@@ -30,6 +30,7 @@ type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
 const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
   const [selectedCategory, setSelectedCategory] =
     useState<MenuCategoriesWithProducts>(restaurant.menuCategories[0]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { products, total, toggleCart, totalQuantity } =
     useContext(CartContext);
@@ -58,6 +59,14 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
           <ClockIcon size={12} />
           <p>Aberto!</p>
         </div>
+
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Buscar produto..."
+          className="mt-3 h-10 w-full rounded-full border border-input bg-background px-4 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        />
       </div>
 
       <ScrollArea className="w-full">
@@ -77,8 +86,22 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
 
-      <h3 className="px-5 pt-2 font-semibold">{selectedCategory.name}</h3>
-      <Products products={selectedCategory.products} />
+      {searchTerm.trim() ? (
+        <>
+          <h3 className="px-5 pt-2 font-semibold">Resultados da busca</h3>
+          <Products
+            products={restaurant.menuCategories.flatMap(
+              (category) => category.products,
+            )}
+            searchTerm={searchTerm}
+          />
+        </>
+      ) : (
+        <>
+          <h3 className="px-5 pt-2 font-semibold">{selectedCategory.name}</h3>
+          <Products products={selectedCategory.products} />
+        </>
+      )}
       {products.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 mx-auto flex w-full max-w-[1200px] items-center justify-between border-t bg-white px-5 py-3">
           <div>

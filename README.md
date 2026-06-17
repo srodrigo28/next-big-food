@@ -2,6 +2,8 @@
 
 Self-checkout de restaurante feito com Next.js, TypeScript, Prisma, Neon, Tailwind CSS e ShadCN UI.
 
+<img src="./home.png" alt=""/>
+
 ## Mapa do Projeto
 
 Use [index.md](index.md) como ponto de partida para acompanhar a sequencia de implementacao e os documentos de apoio.

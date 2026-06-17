@@ -8,13 +8,35 @@ body {
 
 @layer base {
   :root {
+    /* ZapFood brand palette - shared by the customer app shell and pages.
+       Centralized here so future themes can override these values. */
+    --brand-primary: #ff2d20;
+    --brand-primary-foreground: #ffffff;
+    --brand-primary-soft: #fff5f4;
+    --brand-primary-soft-border: #fde2df;
+    --brand-primary-muted: #f0d2cf;
+
+    --brand-surface: #ffffff;
+    --brand-surface-muted: #f3f4f6;
+    --brand-surface-alt: #f7f1f0;
+
+    --brand-text: #121826;
+    --brand-text-strong: #101216;
+    --brand-text-muted: #58616d;
+    --brand-text-soft: #20242b;
+
+    --brand-shell-bg-top: #1a1110;
+    --brand-shell-frame: #050505;
+    --brand-shell-border: #232323;
+    --brand-shell-ring: #666666;
+
     --background: 0 0% 100%;
     --foreground: 0 0% 20%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 20%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
-    --primary: 42 100% 50%;
+    --primary: 4 100% 56%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 20%;
@@ -26,7 +48,7 @@ body {
     --destructive-foreground: 0 0% 98%;
     --border: 198 33% 94%;
     --input: 198 33% 94%;
-    --ring: 0 0% 20%;
+    --ring: 4 100% 56%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;

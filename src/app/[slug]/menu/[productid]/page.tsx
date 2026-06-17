@@ -22,6 +22,14 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           slug: true,
         },
       },
+      productIngredients: {
+        include: { ingredient: true },
+        orderBy: { ingredient: { name: "asc" } },
+      },
+      productAddons: {
+        where: { isActive: true },
+        orderBy: { createdAt: "asc" },
+      },
     },
   });
   if (!product || !product.isAvailable) {

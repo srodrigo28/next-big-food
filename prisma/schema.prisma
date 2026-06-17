@@ -26,6 +26,7 @@ model Restaurant {
   orders         Order[]
   tables         RestaurantTable[]
   users          RestaurantUser[]
+  ingredients    Ingredient[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,7 +52,9 @@ model Product {
   ingredients String[]
   isAvailable Boolean  @default(true)
 
-  orderProducts OrderProduct[]
+  orderProducts      OrderProduct[]
+  productIngredients ProductIngredient[]
+  productAddons      ProductAddon[]
 
   restaurantId String
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
@@ -76,6 +79,10 @@ model Order {
   customerCpf       String?
   tableId           String?
   table             RestaurantTable?  @relation(fields: [tableId], references: [id], onDelete: SetNull)
+
+  asaasChargeId      String?
+  pixExpiresAt       DateTime?
+  cancellationReason String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -141,6 +148,8 @@ model OrderProduct {
   quantity Int
   price    Float
 
+  customization OrderProductCustomization?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -175,4 +184,103 @@ enum AdminRole {
 enum ConsumptionMethod {
   TAKEAWAY
   DINE_IN
+}
+
+enum AllergyType {
+  LACTOSE
+  GLUTEN
+  PEANUT
+  NUTS
+  EGG
+  SOY
+  FISH
+  SHELLFISH
+  COLORANTS
+  OTHER
+}
+
+model Ingredient {
+  id           String       @id @default(uuid())
+  name         String
+  description  String?
+  isAllergen   Boolean      @default(false)
+  allergenType AllergyType?
+  isActive     Boolean      @default(true)
+
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
+
+  productIngredients             ProductIngredient[]
+  removedFromOrderCustomizations OrderProductRemovedIngredient[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductIngredient {
+  id        String  @id @default(uuid())
+  canRemove Boolean @default(false)
+
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId    String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  ingredientId String
+
+  @@unique([productId, ingredientId])
+}
+
+model ProductAddon {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  maxQuantity Int     @default(1)
+  isActive    Boolean @default(true)
+
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+
+  orderAddons OrderProductAddon[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderProductCustomization {
+  id           String        @id @default(uuid())
+  observation  String?
+  hasAllergy   Boolean       @default(false)
+  allergyNotes String?
+  allergyTypes AllergyType[]
+
+  orderProduct   OrderProduct @relation(fields: [orderProductId], references: [id], onDelete: Cascade)
+  orderProductId String       @unique
+
+  removedIngredients OrderProductRemovedIngredient[]
+  addons             OrderProductAddon[]
+}
+
+model OrderProductRemovedIngredient {
+  id           String @id @default(uuid())
+  nameSnapshot String
+
+  customization   OrderProductCustomization @relation(fields: [customizationId], references: [id], onDelete: Cascade)
+  customizationId String
+
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict)
+  ingredientId String
+}
+
+model OrderProductAddon {
+  id                String @id @default(uuid())
+  nameSnapshot      String
+  quantity          Int
+  unitPriceSnapshot Float
+  total             Float
+
+  customization   OrderProductCustomization @relation(fields: [customizationId], references: [id], onDelete: Cascade)
+  customizationId String
+
+  productAddon   ProductAddon @relation(fields: [productAddonId], references: [id], onDelete: Restrict)
+  productAddonId String
 }

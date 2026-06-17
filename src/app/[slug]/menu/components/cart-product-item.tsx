@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon, TrashIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, ShieldAlertIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import { useContext } from "react";
 
@@ -14,6 +14,7 @@ interface CartItemProps {
 const CartProductItem = ({ product }: CartItemProps) => {
   const { decreaseProductQuantity, increaseProductQuantity, removeProduct } =
     useContext(CartContext);
+  const { customization } = product;
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
@@ -30,14 +31,42 @@ const CartProductItem = ({ product }: CartItemProps) => {
             {product.name}
           </p>
           <p className="text-sm font-semibold lg:text-base">
-            {formatCurrency(product.price)}
+            {formatCurrency(product.unitPrice)}
           </p>
+
+          {customization && (
+            <div className="space-y-0.5 text-xs text-muted-foreground">
+              {customization.removedIngredients.length > 0 && (
+                <p>
+                  Sem:{" "}
+                  {customization.removedIngredients
+                    .map((ingredient) => ingredient.name)
+                    .join(", ")}
+                </p>
+              )}
+              {customization.addons.map((addon) => (
+                <p key={addon.addonId}>
+                  + {addon.name} x{addon.quantity}
+                </p>
+              ))}
+              {customization.observation && (
+                <p className="truncate">Obs: {customization.observation}</p>
+              )}
+              {customization.hasAllergy && (
+                <p className="flex items-center gap-1 text-orange-600">
+                  <ShieldAlertIcon className="h-3 w-3" />
+                  Alergia informada
+                </p>
+              )}
+            </div>
+          )}
+
           {/* QUANTIDADE */}
           <div className="flex items-center gap-1 text-center">
             <Button
               className="h-7 w-7 rounded-lg lg:h-10 lg:w-10"
               variant="outline"
-              onClick={() => decreaseProductQuantity(product.id)}
+              onClick={() => decreaseProductQuantity(product.cartItemId)}
             >
               <ChevronLeftIcon />
             </Button>
@@ -47,14 +76,14 @@ const CartProductItem = ({ product }: CartItemProps) => {
             <Button
               className="h-7 w-7 rounded-lg lg:h-10 lg:w-10"
               variant="destructive"
-              onClick={() => increaseProductQuantity(product.id)}
+              onClick={() => increaseProductQuantity(product.cartItemId)}
             >
               <ChevronRightIcon />
             </Button>
             <Button
               className="h-7 w-7 rounded-lg sm:ml-5 lg:h-10 lg:w-10"
               variant="outline"
-              onClick={() => removeProduct(product.id)}
+              onClick={() => removeProduct(product.cartItemId)}
             >
               <TrashIcon />
             </Button>

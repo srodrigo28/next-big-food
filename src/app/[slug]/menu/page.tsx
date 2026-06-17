@@ -35,11 +35,7 @@ const RestaurantMenuPage = async ({
     include: {
       menuCategories: {
         include: {
-          products: {
-            where: {
-              isAvailable: true,
-            },
-          },
+          products: true,
         },
       },
     },

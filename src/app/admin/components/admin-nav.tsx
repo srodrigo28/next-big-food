@@ -2,6 +2,7 @@ import {
   ClipboardListIcon,
   CookingPotIcon,
   LayoutDashboardIcon,
+  LeafIcon,
   PackageIcon,
   Table2Icon,
   TagsIcon,
@@ -38,6 +39,11 @@ const items = [
     href: "/admin/products",
     label: "Produtos",
     icon: PackageIcon,
+  },
+  {
+    href: "/admin/ingredients",
+    label: "Ingredientes",
+    icon: LeafIcon,
   },
 ];
 

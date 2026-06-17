@@ -9,14 +9,14 @@ Use este arquivo como checklist:
 
 ## 1. Objetivo do Modulo
 
-- [ ] Permitir que o admin configure ingredientes por produto
-- [ ] Permitir que o admin configure adicionais pagos por produto
-- [ ] Permitir que o admin configure remocoes permitidas por produto
-- [ ] Permitir que o cliente remova ingredientes do produto
-- [ ] Permitir que o cliente adicione ingredientes/adicionais com valor
-- [ ] Permitir que o cliente informe alergias
-- [ ] Mostrar aviso claro quando o produto nao tiver lista de personalizacao configurada
-- [ ] Registrar personalizacoes no pedido e mostrar para cozinha/admin
+- [x] Permitir que o admin configure ingredientes por produto
+- [x] Permitir que o admin configure adicionais pagos por produto
+- [x] Permitir que o admin configure remocoes permitidas por produto
+- [x] Permitir que o cliente remova ingredientes do produto
+- [x] Permitir que o cliente adicione ingredientes/adicionais com valor
+- [x] Permitir que o cliente informe alergias
+- [x] Mostrar aviso claro quando o produto nao tiver lista de personalizacao configurada
+- [x] Registrar personalizacoes no pedido e mostrar para cozinha/admin
 
 ## 2. Conceitos Principais
 
@@ -34,10 +34,10 @@ Exemplo:
 
 Uso esperado:
 
-- [ ] Mostrar ao cliente os ingredientes do produto
-- [ ] Permitir remover quando configurado pelo admin
-- [ ] Marcar ingredientes alergicos ou sensiveis
-- [ ] Mostrar remocoes no pedido enviado para cozinha
+- [x] Mostrar ao cliente os ingredientes do produto
+- [x] Permitir remover quando configurado pelo admin
+- [x] Marcar ingredientes alergicos ou sensiveis
+- [x] Mostrar remocoes no pedido enviado para cozinha
 
 ### Adicional Pago
 
@@ -52,11 +52,11 @@ Exemplo:
 
 Uso esperado:
 
-- [ ] Admin define nome, descricao opcional e preco
-- [ ] Admin define quantidade maxima por adicional
-- [ ] Cliente escolhe os adicionais antes de adicionar na sacola
-- [ ] Valor do produto soma adicionais selecionados
-- [ ] Cozinha recebe adicionais no detalhe do item
+- [x] Admin define nome, descricao opcional e preco
+- [x] Admin define quantidade maxima por adicional
+- [x] Cliente escolhe os adicionais antes de adicionar na sacola
+- [x] Valor do produto soma adicionais selecionados
+- [x] Cozinha recebe adicionais no detalhe do item
 
 ### Remocao de Ingrediente
 
@@ -71,10 +71,10 @@ Exemplo:
 
 Uso esperado:
 
-- [ ] Admin define quais ingredientes podem ser removidos
-- [ ] Cliente marca ingredientes que quer remover
-- [ ] Remocoes aparecem na sacola
-- [ ] Remocoes aparecem na cozinha/admin
+- [x] Admin define quais ingredientes podem ser removidos
+- [x] Cliente marca ingredientes que quer remover
+- [x] Remocoes aparecem na sacola
+- [x] Remocoes aparecem na cozinha/admin
 
 ### Alergia
 
@@ -91,10 +91,10 @@ Exemplo:
 
 Uso esperado:
 
-- [ ] Cliente marca se possui alergia
-- [ ] Quando marcar alergia, abrir checkboxes de alergias comuns
-- [ ] Cliente pode escrever observacao livre sobre alergia
-- [ ] Pedido com alergia deve aparecer destacado para admin/cozinha
+- [x] Cliente marca se possui alergia
+- [x] Quando marcar alergia, abrir checkboxes de alergias comuns
+- [x] Cliente pode escrever observacao livre sobre alergia
+- [x] Pedido com alergia deve aparecer destacado para admin/cozinha
 - [ ] Produto deve alertar quando contem ingrediente alergico configurado
 
 ## 3. Experiencia no Cliente
@@ -103,26 +103,26 @@ Uso esperado:
 
 Ao abrir um produto, o cliente deve ver:
 
-- [ ] Nome, imagem, descricao e preco base
-- [ ] Ingredientes base do produto
-- [ ] Lista de ingredientes que podem ser removidos
-- [ ] Lista de adicionais pagos
-- [ ] Campo de observacao do item
-- [ ] Pergunta: "Possui alguma alergia?"
-- [ ] Se sim, mostrar checkboxes de alergias
-- [ ] Campo de observacao de alergia
-- [ ] Total atualizado com adicionais
-- [ ] Botao adicionar na sacola
+- [x] Nome, imagem, descricao e preco base
+- [x] Ingredientes base do produto
+- [x] Lista de ingredientes que podem ser removidos
+- [x] Lista de adicionais pagos
+- [x] Campo de observacao do item
+- [x] Pergunta: "Possui alguma alergia?"
+- [x] Se sim, mostrar checkboxes de alergias
+- [x] Campo de observacao de alergia
+- [x] Total atualizado com adicionais
+- [x] Botao adicionar na sacola
 
 ### Quando Nao Houver Configuracao
 
 Se o admin nao configurou ingredientes/adicionais para o produto:
 
-- [ ] Mostrar mensagem: "Este produto ainda nao possui opcoes de personalizacao configuradas."
-- [ ] Permitir adicionar normalmente na sacola
-- [ ] Manter campo de observacao do item
-- [ ] Manter pergunta de alergia
-- [ ] Nao bloquear compra
+- [x] Mostrar mensagem: "Este produto ainda nao possui opcoes de personalizacao configuradas."
+- [x] Permitir adicionar normalmente na sacola
+- [x] Manter campo de observacao do item
+- [x] Manter pergunta de alergia
+- [x] Nao bloquear compra
 
 ### Texto Sugerido para Cliente
 
@@ -148,34 +148,34 @@ Descreva qualquer cuidado necessario para o preparo.
 
 ### Cadastro de Ingredientes
 
-- [ ] Criar tela `/admin/ingredients`
-- [ ] Listar ingredientes do restaurante
-- [ ] Criar ingrediente
+- [x] Criar tela `/admin/ingredients`
+- [x] Listar ingredientes do restaurante
+- [x] Criar ingrediente
 - [ ] Editar ingrediente
-- [ ] Marcar ingrediente como alergeno
-- [ ] Selecionar tipo de alergeno: lactose, gluten, amendoim, ovo, soja, frutos do mar, outro
-- [ ] Ativar/desativar ingrediente
+- [x] Marcar ingrediente como alergeno
+- [x] Selecionar tipo de alergeno: lactose, gluten, amendoim, ovo, soja, frutos do mar, outro
+- [x] Ativar/desativar ingrediente
 
 ### Configuracao por Produto
 
 Na tela de produtos, o admin deve poder configurar:
 
-- [ ] Ingredientes base do produto
-- [ ] Ingredientes removiveis
-- [ ] Adicionais disponiveis
-- [ ] Preco de cada adicional
-- [ ] Quantidade maxima de cada adicional
+- [x] Ingredientes base do produto
+- [x] Ingredientes removiveis
+- [x] Adicionais disponiveis
+- [x] Preco de cada adicional
+- [x] Quantidade maxima de cada adicional
 - [ ] Se adicional e obrigatorio ou opcional
-- [ ] Se produto aceita observacao
-- [ ] Se produto deve exibir alerta de alergia
+- [x] Se produto aceita observacao
+- [x] Se produto deve exibir alerta de alergia
 
 ### Mensagem Admin Quando Nao Houver Lista
 
 Se um produto ainda nao tiver personalizacao:
 
 - [ ] Mostrar alerta no admin: "Produto sem personalizacao configurada"
-- [ ] Mostrar botao: "Configurar ingredientes"
-- [ ] Permitir salvar produto sem ingredientes
+- [x] Mostrar botao: "Configurar ingredientes" (botao "Personalização" em `/admin/products`)
+- [x] Permitir salvar produto sem ingredientes
 
 Texto sugerido:
 
@@ -187,28 +187,28 @@ Este produto ainda nao possui lista de ingredientes, adicionais ou remocoes. Con
 
 ### Novas Tabelas
 
-- [ ] `Ingredient`
-- [ ] `ProductIngredient`
-- [ ] `ProductAddon`
-- [ ] `OrderProductCustomization`
-- [ ] `OrderProductRemovedIngredient`
-- [ ] `OrderProductAddon`
-- [ ] `AllergyTag`
-- [ ] `OrderAllergy`
+- [x] `Ingredient`
+- [x] `ProductIngredient`
+- [x] `ProductAddon`
+- [x] `OrderProductCustomization`
+- [x] `OrderProductRemovedIngredient`
+- [x] `OrderProductAddon`
+- [ ] `AllergyTag` (implementado como enum `AllergyType`)
+- [ ] `OrderAllergy` (implementado como campos `hasAllergy`/`allergyTypes`/`allergyNotes` em `OrderProductCustomization`)
 
 ### Ingredient
 
 Campos sugeridos:
 
-- [ ] `id`
-- [ ] `name`
-- [ ] `description`
-- [ ] `restaurantId`
-- [ ] `isAllergen`
-- [ ] `allergenType`
-- [ ] `isActive`
-- [ ] `createdAt`
-- [ ] `updatedAt`
+- [x] `id`
+- [x] `name`
+- [x] `description`
+- [x] `restaurantId`
+- [x] `isAllergen`
+- [x] `allergenType`
+- [x] `isActive`
+- [x] `createdAt`
+- [x] `updatedAt`
 
 ### ProductIngredient
 
@@ -216,10 +216,10 @@ Liga produto aos ingredientes base.
 
 Campos sugeridos:
 
-- [ ] `id`
-- [ ] `productId`
-- [ ] `ingredientId`
-- [ ] `canRemove`
+- [x] `id`
+- [x] `productId`
+- [x] `ingredientId`
+- [x] `canRemove`
 - [ ] `isDefault`
 
 ### ProductAddon
@@ -228,13 +228,13 @@ Liga produto aos adicionais pagos.
 
 Campos sugeridos:
 
-- [ ] `id`
-- [ ] `productId`
+- [x] `id`
+- [x] `productId`
 - [ ] `ingredientId`
-- [ ] `name`
-- [ ] `price`
-- [ ] `maxQuantity`
-- [ ] `isActive`
+- [x] `name`
+- [x] `price`
+- [x] `maxQuantity`
+- [x] `isActive`
 
 ### OrderProductCustomization
 
@@ -242,11 +242,11 @@ Guarda a personalizacao final do item no pedido.
 
 Campos sugeridos:
 
-- [ ] `id`
-- [ ] `orderProductId`
-- [ ] `observation`
-- [ ] `hasAllergy`
-- [ ] `allergyNotes`
+- [x] `id`
+- [x] `orderProductId`
+- [x] `observation`
+- [x] `hasAllergy`
+- [x] `allergyNotes`
 
 ### OrderProductRemovedIngredient
 
@@ -254,10 +254,10 @@ Guarda ingredientes removidos.
 
 Campos sugeridos:
 
-- [ ] `id`
-- [ ] `orderProductId`
-- [ ] `ingredientId`
-- [ ] `nameSnapshot`
+- [x] `id`
+- [x] `orderProductId` (via `customizationId`)
+- [x] `ingredientId`
+- [x] `nameSnapshot`
 
 ### OrderProductAddon
 
@@ -265,13 +265,13 @@ Guarda adicionais escolhidos.
 
 Campos sugeridos:
 
-- [ ] `id`
-- [ ] `orderProductId`
-- [ ] `productAddonId`
-- [ ] `nameSnapshot`
-- [ ] `quantity`
-- [ ] `unitPriceSnapshot`
-- [ ] `total`
+- [x] `id`
+- [x] `orderProductId` (via `customizationId`)
+- [x] `productAddonId`
+- [x] `nameSnapshot`
+- [x] `quantity`
+- [x] `unitPriceSnapshot`
+- [x] `total`
 
 ### OrderAllergy
 
@@ -285,62 +285,65 @@ Campos sugeridos:
 - [ ] `type`
 - [ ] `notes`
 
+Implementado de forma simplificada via `hasAllergy`, `allergyTypes[]` e `allergyNotes`
+diretamente em `OrderProductCustomization`, sem tabela dedicada.
+
 ## 6. Tipos de Alergia Sugeridos
 
-- [ ] Lactose
-- [ ] Gluten
-- [ ] Amendoim
-- [ ] Castanhas
-- [ ] Ovo
-- [ ] Soja
-- [ ] Peixe
-- [ ] Frutos do mar
-- [ ] Corantes
-- [ ] Outro
+- [x] Lactose
+- [x] Gluten
+- [x] Amendoim
+- [x] Castanhas
+- [x] Ovo
+- [x] Soja
+- [x] Peixe
+- [x] Frutos do mar
+- [x] Corantes
+- [x] Outro
 
 ## 7. Regras de Negocio
 
-- [ ] Produto pode ser vendido mesmo sem personalizacao configurada
-- [ ] Produto pode ter ingredientes base sem adicionais pagos
-- [ ] Produto pode ter adicionais pagos sem permitir remocoes
-- [ ] Produto pode permitir observacao mesmo sem ingredientes configurados
-- [ ] Cliente pode marcar alergia mesmo sem personalizar ingrediente
-- [ ] Pedido com alergia deve ter destaque visual no admin/cozinha
-- [ ] Adicional pago deve alterar total do item
-- [ ] Total do pedido deve considerar adicionais
-- [ ] Remover ingrediente nao reduz preco, salvo regra futura especifica
-- [ ] Valores devem ser gravados como snapshot para preservar historico
+- [x] Produto pode ser vendido mesmo sem personalizacao configurada
+- [x] Produto pode ter ingredientes base sem adicionais pagos
+- [x] Produto pode ter adicionais pagos sem permitir remocoes
+- [x] Produto pode permitir observacao mesmo sem ingredientes configurados
+- [x] Cliente pode marcar alergia mesmo sem personalizar ingrediente
+- [x] Pedido com alergia deve ter destaque visual no admin/cozinha
+- [x] Adicional pago deve alterar total do item
+- [x] Total do pedido deve considerar adicionais
+- [x] Remover ingrediente nao reduz preco, salvo regra futura especifica
+- [x] Valores devem ser gravados como snapshot para preservar historico
 
 ## 8. Admin - Telas Necessarias
 
-- [ ] `/admin/ingredients`
-- [ ] `/admin/products/{productId}/customization`
-- [ ] Bloco de ingredientes na tela `/admin/products`
-- [ ] Bloco de adicionais na tela `/admin/products`
+- [x] `/admin/ingredients`
+- [x] `/admin/products/{productId}/customization`
+- [x] Bloco de ingredientes na tela `/admin/products`
+- [x] Bloco de adicionais na tela `/admin/products`
 - [ ] Alerta de produto sem configuracao
 - [ ] Indicador de produto com alergeno
 
 ## 9. Cliente - Telas Necessarias
 
-- [ ] Bloco de remocao de ingredientes na tela de produto
-- [ ] Bloco de adicionais pagos na tela de produto
-- [ ] Pergunta de alergia na tela de produto
-- [ ] Checkboxes de alergias comuns
-- [ ] Campo de observacao do item
-- [ ] Campo de observacao de alergia
-- [ ] Resumo de personalizacao na sacola
-- [ ] Resumo de personalizacao no historico do pedido
+- [x] Bloco de remocao de ingredientes na tela de produto
+- [x] Bloco de adicionais pagos na tela de produto
+- [x] Pergunta de alergia na tela de produto
+- [x] Checkboxes de alergias comuns
+- [x] Campo de observacao do item
+- [x] Campo de observacao de alergia
+- [x] Resumo de personalizacao na sacola
+- [x] Resumo de personalizacao no historico do pedido
 
 ## 10. Admin/Cozinha - Visualizacao do Pedido
 
 O pedido deve destacar:
 
-- [ ] Ingredientes removidos
-- [ ] Adicionais escolhidos
-- [ ] Observacao do cliente
-- [ ] Alergia marcada
-- [ ] Tipo de alergia
-- [ ] Observacao de alergia
+- [x] Ingredientes removidos
+- [x] Adicionais escolhidos
+- [x] Observacao do cliente
+- [x] Alergia marcada
+- [x] Tipo de alergia
+- [x] Observacao de alergia
 
 Texto de alerta sugerido:
 
@@ -352,35 +355,35 @@ ATENCAO: pedido com alergia informada pelo cliente.
 
 ### Fase 1 - Banco e Admin
 
-- [ ] Criar tabelas de ingredientes e adicionais
-- [ ] Criar migration
+- [x] Criar tabelas de ingredientes e adicionais
+- [x] Criar migration
 - [ ] Criar seed de ingredientes comuns
-- [ ] Criar `/admin/ingredients`
-- [ ] Criar configuracao de ingredientes por produto
-- [ ] Criar configuracao de adicionais por produto
+- [x] Criar `/admin/ingredients`
+- [x] Criar configuracao de ingredientes por produto
+- [x] Criar configuracao de adicionais por produto
 
 ### Fase 2 - Cliente
 
-- [ ] Mostrar ingredientes base na tela do produto
-- [ ] Permitir remover ingredientes
-- [ ] Permitir selecionar adicionais pagos
-- [ ] Calcular preco do item com adicionais
-- [ ] Permitir marcar alergia
-- [ ] Permitir observacao do item
-- [ ] Mostrar resumo na sacola
+- [x] Mostrar ingredientes base na tela do produto
+- [x] Permitir remover ingredientes
+- [x] Permitir selecionar adicionais pagos
+- [x] Calcular preco do item com adicionais
+- [x] Permitir marcar alergia
+- [x] Permitir observacao do item
+- [x] Mostrar resumo na sacola
 
 ### Fase 3 - Pedido e Cozinha
 
-- [ ] Salvar customizacoes no pedido
-- [ ] Mostrar customizacoes no admin de pedidos
-- [ ] Mostrar customizacoes na cozinha
-- [ ] Destacar alergia no Kanban da cozinha
-- [ ] Garantir snapshot de nomes e valores
+- [x] Salvar customizacoes no pedido
+- [x] Mostrar customizacoes no admin de pedidos
+- [x] Mostrar customizacoes na cozinha
+- [x] Destacar alergia no Kanban da cozinha
+- [x] Garantir snapshot de nomes e valores
 
 ### Fase 4 - Refinamento
 
-- [ ] Criar validacoes por produto
-- [ ] Criar limites de adicionais
+- [x] Criar validacoes por produto (servidor revalida ingredientes/adicionais pertencentes ao produto)
+- [x] Criar limites de adicionais (respeita `maxQuantity` no cliente e no servidor)
 - [ ] Criar relatorio de adicionais mais vendidos
 - [ ] Criar auditoria de mudancas em ingredientes
 
@@ -389,9 +392,9 @@ ATENCAO: pedido com alergia informada pelo cliente.
 - [ ] Nao tratar alergia como garantia de ausencia total de contaminacao cruzada
 - [ ] Mostrar aviso de responsabilidade do estabelecimento
 - [ ] Evitar apagar ingrediente usado em pedido historico
-- [ ] Usar snapshot em pedidos para manter historico correto
+- [x] Usar snapshot em pedidos para manter historico correto
 - [ ] Pensar em Decimal para valores financeiros antes de escalar
-- [ ] Diferenciar ingrediente base, ingrediente removivel e adicional pago
+- [x] Diferenciar ingrediente base, ingrediente removivel e adicional pago
 
 ## 13. Registro
 
@@ -401,3 +404,25 @@ ATENCAO: pedido com alergia informada pelo cliente.
 - [ ] Banco ainda nao implementado
 - [ ] Admin ainda nao implementado
 - [ ] Cliente ainda nao implementado
+
+### 2026-06-14
+
+- [x] Banco implementado: `Ingredient`, `ProductIngredient`, `ProductAddon`,
+  `OrderProductCustomization`, `OrderProductRemovedIngredient`, `OrderProductAddon`,
+  enum `AllergyType` (migration `add_ingredient_customization`)
+- [x] Admin implementado: `/admin/ingredients` (CRUD simples + alergeno) e
+  `/admin/products/{productId}/customization` (ingredientes removiveis e adicionais pagos)
+- [x] Botao "Personalização" adicionado em `/admin/products`
+- [x] Cliente implementado: tela de produto com remocao de ingredientes, adicionais com
+  stepper de quantidade, observacao do item e pergunta de alergia (checkboxes +
+  observacao livre)
+- [x] Sacola mostra resumo da personalizacao (removidos, adicionais, observacao, alergia)
+- [x] Pedido grava personalizacao com snapshot de nomes e precos, recalculando o preco do
+  item no servidor (`createOrder`)
+- [x] `/admin/orders/{orderId}`, `/admin/kitchen`, `/{slug}/order/{orderId}` e
+  `/{slug}/orders` exibem a personalizacao e destacam alergia informada
+- [x] Verificacao ponta a ponta feita via dados de teste (ingrediente removivel,
+  ingrediente alergeno PEANUT e adicional pago no Big Mac): tela do produto exibe
+  as 3 secoes novas, pedido com customizacao grava snapshot correto e aparece em
+  `/admin/orders/{id}`, `/admin/kitchen`, `/{slug}/order/{id}` e `/{slug}/orders`
+  com alerta de alergia. Dados de teste removidos apos a verificacao.

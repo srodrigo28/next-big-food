@@ -133,7 +133,7 @@ const BottomNavItem = ({
 }) => (
   <button
     className={`flex min-w-0 flex-1 flex-col items-center gap-1 text-xs font-medium ${
-      active ? "text-[#ff2d20]" : "text-gray-500"
+      active ? "text-[var(--brand-primary)]" : "text-gray-500"
     }`}
   >
     {icon}
@@ -146,17 +146,17 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
   const menuHref = `/${slug}/menu?${menuSearch}`;
 
   return (
-    <div className="min-h-full w-full bg-white text-[#121826]">
+    <div className="min-h-full w-full bg-white text-[var(--brand-text)]">
       <div className="px-4 pb-8 pt-5">
           <header className="sticky top-0 z-20 -mx-4 -mt-5 space-y-5 bg-white px-4 pb-4 pt-5 shadow-[0_8px_16px_-12px_rgba(15,23,42,0.25)]">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <MapPinIcon className="h-8 w-8 text-[#ff2d20]" />
+                <MapPinIcon className="h-8 w-8 text-[var(--brand-primary)]" />
                 <div className="leading-tight">
                   <p className="text-sm text-gray-500">Entregar em</p>
                   <button className="flex items-center gap-1 text-left text-base font-semibold">
                     Rua Goias, Centro
-                    <ChevronDownIcon className="h-4 w-4 text-[#ff2d20]" />
+                    <ChevronDownIcon className="h-4 w-4 text-[var(--brand-primary)]" />
                   </button>
                 </div>
               </div>
@@ -164,11 +164,11 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
               <div className="flex items-center gap-5">
                 <div className="relative">
                   <BellIcon className="h-7 w-7" />
-                  <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-[#ff2d20]" />
+                  <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-[var(--brand-primary)]" />
                 </div>
                 <div className="relative">
                   <ShoppingBagIcon className="h-7 w-7" />
-                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#ff2d20] text-[11px] font-bold text-white">
+                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--brand-primary)] text-[11px] font-bold text-white">
                     2
                   </span>
                 </div>
@@ -177,11 +177,11 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
 
             <Link href={menuHref} className="block">
               <div className="mx-auto flex items-center justify-center gap-3">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#ff2d20] text-white">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand-primary)] text-white">
                   <span className="text-3xl font-black leading-none">⚡</span>
                 </span>
                 <span className="text-4xl font-black italic tracking-tight">
-                  Zap<span className="text-[#ff2d20]">Food</span>
+                  Zap<span className="text-[var(--brand-primary)]">Food</span>
                 </span>
               </div>
             </Link>
@@ -199,7 +199,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
 
           <Link
             href={menuHref}
-            className="relative mt-6 block h-[238px] overflow-hidden rounded-xl bg-[#ff2d20] px-6 py-7 text-white shadow-sm"
+            className="relative mt-6 block h-[238px] overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-7 text-white shadow-sm"
           >
             <div className="relative z-10 max-w-[190px]">
               <p className="text-3xl font-black italic leading-none">
@@ -227,7 +227,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
                 className="object-contain"
               />
             </div>
-            <span className="absolute bottom-5 right-5 flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#ff2d20] shadow-lg">
+            <span className="absolute bottom-5 right-5 flex h-20 w-20 items-center justify-center rounded-full bg-white text-[var(--brand-primary)] shadow-lg">
               <span className="text-3xl">🛵</span>
             </span>
           </Link>
@@ -235,7 +235,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           <section className="mt-7">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Categorias</h2>
-              <Link href={menuHref} className="text-base font-bold text-[#ff2d20]">
+              <Link href={menuHref} className="text-base font-bold text-[var(--brand-primary)]">
                 Ver todas
               </Link>
             </div>
@@ -263,7 +263,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           <section className="mt-8">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Restaurantes proximos de voce</h2>
-              <Link href={menuHref} className="text-base font-bold text-[#ff2d20]">
+              <Link href={menuHref} className="text-base font-bold text-[var(--brand-primary)]">
                 Ver todos
               </Link>
             </div>
@@ -281,7 +281,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
                       fill
                       className="object-cover"
                     />
-                    <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#ff2d20] shadow">
+                    <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-[var(--brand-primary)] shadow">
                       <HeartIcon className="h-5 w-5" />
                     </span>
                   </div>
@@ -309,7 +309,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           <section className="mt-8">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">O melhor de cada restaurante</h2>
-              <Link href={menuHref} className="text-base font-bold text-[#ff2d20]">
+              <Link href={menuHref} className="text-base font-bold text-[var(--brand-primary)]">
                 Ver todos
               </Link>
             </div>
@@ -327,7 +327,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
                       fill
                       className="object-cover"
                     />
-                    <span className="absolute left-3 top-3 rounded-md bg-white px-3 py-1 text-xs font-bold text-[#ff2d20] shadow">
+                    <span className="absolute left-3 top-3 rounded-md bg-white px-3 py-1 text-xs font-bold text-[var(--brand-primary)] shadow">
                       {product.badge}
                     </span>
                   </div>
@@ -338,7 +338,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
                     <p className="mt-1 text-sm text-gray-500">{product.restaurant}</p>
                     <div className="mt-5 flex items-center justify-between">
                       <p className="text-lg font-bold">{product.price}</p>
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ff2d20] text-white">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-primary)] text-white">
                         <PlusIcon className="h-5 w-5" />
                       </span>
                     </div>
@@ -352,14 +352,14 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
             href={menuHref}
             className="mt-8 flex items-center gap-4 rounded-xl border border-red-100 bg-red-50/20 p-4"
           >
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[#ff2d20]">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[var(--brand-primary)]">
               <ShoppingBagIcon className="h-8 w-8" />
             </span>
             <div className="min-w-0 flex-1">
               <h2 className="text-lg font-bold">Peca de novo com 1 clique</h2>
               <p className="mt-1 text-sm text-gray-500">Seus ultimos pedidos</p>
             </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border bg-white text-[#ff2d20]">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border bg-white text-[var(--brand-primary)]">
               <ChevronDownIcon className="h-5 w-5 -rotate-90" />
             </span>
           </Link>
